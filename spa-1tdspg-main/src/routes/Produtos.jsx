@@ -38,6 +38,25 @@ export default function Produtos() {
     }
   }, [open]);
 
+  const handleExcuir = (id) =>{
+
+    fetch(`http://localhost:5000/produtos/${id}`,{
+      method: "DELETE",
+      headers:{
+        "Content-type":"application/json"
+      },
+    })
+    .then((response)=> console.log(response.status))
+    .catch(error=> console.log(error))
+
+    window.location("/produtos");
+
+  } 
+
+
+
+
+
   return (
     <>
       <div>
@@ -80,7 +99,7 @@ export default function Produtos() {
                     <Editar />
                   </Link>{" "}
                   /{" "}
-                  <Link to={`/excluir/produto/${produto.id}`}>
+                  <Link onClick={()=>handleExcuir(produto.id)}>
                     <Excluir />
                   </Link>{" "}
                 </td>
